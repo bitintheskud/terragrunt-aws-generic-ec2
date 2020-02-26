@@ -23,7 +23,7 @@ output "dns_public_ip" {
 }
 
 output "instance_ids" {
-  value = module.ec2_cluster.*.id
+  value       = module.ec2_cluster.*.id
   description = "EC2 instance id as a list"
 }
 output "security_group_id" {
