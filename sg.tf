@@ -36,10 +36,21 @@ resource "aws_security_group_rule" "allow_ssh_from_bastion" {
 }
 
 resource "aws_security_group_rule" "allow_http_rule" {
+  count             = var.enable_http ? 1 : 0
   from_port         = 80
   cidr_blocks       = ["0.0.0.0/0"]
   protocol          = "tcp"
   to_port           = 80
+  type              = "ingress"
+  security_group_id = aws_security_group.security_group.id
+}
+
+resource "aws_security_group_rule" "allow_https_rule" {
+  count             = var.enable_http ? 1 : 0
+  from_port         = 443 
+  cidr_blocks       = ["0.0.0.0/0"]
+  protocol          = "tcp"
+  to_port           = 443 
   type              = "ingress"
   security_group_id = aws_security_group.security_group.id
 }
