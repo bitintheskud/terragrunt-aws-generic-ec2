@@ -23,10 +23,21 @@ output "dns_public_ip" {
 }
 
 output "instance_ids" {
-  value       = module.ec2_cluster.*.id
+  value       = module.ec2_cluster.id
   description = "EC2 instance id as a list"
 }
+
 output "security_group_id" {
   value       = aws_security_group.security_group.id
   description = "Security Group id attach to the instance(s)"
+}
+
+output "availability_zone" {
+  value       = module.ec2_cluster.availability_zone
+  description = "EC2 availability_zone as a list"
+}
+
+output "instance_count" {
+  value = var.ec2_instance_count
+  description = "EC2 instance count"
 }
