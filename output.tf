@@ -22,6 +22,10 @@ output "dns_public_ip" {
   value = aws_route53_record.public_dns.*.name
 }
 
+output "instance_ids" {
+  value = module.ec2_cluster.*.id
+  description = "EC2 instance id as a list"
+}
 output "security_group_id" {
   value       = aws_security_group.security_group.id
   description = "Security Group id attach to the instance(s)"
