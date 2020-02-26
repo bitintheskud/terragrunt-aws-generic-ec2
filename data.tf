@@ -9,15 +9,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-data "aws_subnet_ids" "public" {
-  vpc_id = var.vpc_id
-
-  filter {
-    name   = "tag:Tier"
-    values = ["public", "Public"]
-  }
-}
-
 data "template_file" "user_data" {
   template = file("${path.module}/user_data.tpl")
   vars = {
