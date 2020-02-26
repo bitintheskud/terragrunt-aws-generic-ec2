@@ -2,7 +2,6 @@ variable "env" {}
 
 variable "aws_region" {
   type        = string
-  default     = "eu-west-1"
   description = "AWS region to create resource in"
 }
 
@@ -72,6 +71,12 @@ variable "enable_ssh" {
   type        = bool
   description = "Enable or disable ssh access"
   default     = false
+}
+
+variable "enable_http" {
+  type        = bool
+  description = "Enable or disable http / https"
+  default     = false 
 }
 
 variable "ssh_cidr_blocks" {
@@ -144,4 +149,10 @@ variable "security_group" {
   type        = any
   default     = {}
   description = "Security group parameters"
+}
+
+variable "iam_instance_profile" {
+  type = string
+  default = ""
+  description = "The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile."
 }

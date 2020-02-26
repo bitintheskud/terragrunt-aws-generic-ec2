@@ -26,6 +26,8 @@ module "ec2_cluster" {
     aws_security_group.security_group.id
   ]
 
+  iam_instance_profile = var.iam_instance_profile
+
   subnet_ids = var.ec2_subnet_ids
 
   user_data = data.template_file.user_data.rendered
