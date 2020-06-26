@@ -8,6 +8,39 @@ locals {
   name_identifier = "${var.project}-${lookup(var.short_env, var.env, "noenv")}-${var.identifier}-${random_string.this_id.result}"
 }
 
+resource "aws_iam_instance_profile" "instance_profile" {
+  name = "${local.name_identifier}-instance_profile"
+  role = aws_iam_role.iam_role.name
+}
+
+resource "aws_iam_role_policy" "iam_role_policy" {
+  name = "${local.name_identifier}-policy"
+  role = aws_iam_role.iam_role.id
+
+  policy = var.iam_instance_profile_policy
+}
+
+resource "aws_iam_role" "iam_role" {
+  name = "${local.name_identifier}-role"
+  path = "/"
+
+  assume_role_policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+               "Service": "ec2.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+        }
+    ]
+}
+EOF
+}
+
 module "ec2_cluster" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 2.0"
@@ -26,7 +59,7 @@ module "ec2_cluster" {
     aws_security_group.security_group.id
   ]
 
-  iam_instance_profile = var.iam_instance_profile
+  iam_instance_profile = aws_iam_instance_profile.instance_profile.id
 
   subnet_ids = var.ec2_subnet_ids
 

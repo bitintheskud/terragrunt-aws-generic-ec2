@@ -151,8 +151,17 @@ variable "security_group" {
   description = "Security group parameters"
 }
 
-variable "iam_instance_profile" {
+variable "iam_instance_profile_policy" {
   type = string
-  default = ""
   description = "The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile."
+}
+
+variable "cloudwatch_sns_topic_arn" {
+  type = string
+  description = "The SNS topic ARN to send cloudwatch alarm"
+}
+
+variable "cloudwatch_action_enable" {
+  type = bool
+  description = "Disable or enable action for cloudwatch alarm"
 }
