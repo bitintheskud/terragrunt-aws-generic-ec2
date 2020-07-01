@@ -76,7 +76,7 @@ variable "enable_ssh" {
 variable "enable_http" {
   type        = bool
   description = "Enable or disable http / https"
-  default     = false 
+  default     = false
 }
 
 variable "ssh_cidr_blocks" {
@@ -132,7 +132,7 @@ variable "ec2_ami_id" {
 }
 
 variable "short_env" {
-  type = map
+  type = map(string)
   default = {
     development   = "dev"
     production    = "prod"
@@ -152,16 +152,22 @@ variable "security_group" {
 }
 
 variable "iam_instance_profile_policy" {
-  type = string
+  type        = string
   description = "The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile."
 }
 
 variable "cloudwatch_sns_topic_arn" {
-  type = string
+  type        = string
   description = "The SNS topic ARN to send cloudwatch alarm"
 }
 
 variable "cloudwatch_action_enable" {
-  type = bool
+  type        = bool
   description = "Disable or enable action for cloudwatch alarm"
+}
+
+variable "cloudwatch_alert_to_enable" {
+  type        = list(string)
+  description = "List of cloudwatch alert type"
+  default     = ["swap", "memory", "disk", "cpu"]
 }

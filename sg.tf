@@ -47,10 +47,10 @@ resource "aws_security_group_rule" "allow_http_rule" {
 
 resource "aws_security_group_rule" "allow_https_rule" {
   count             = var.enable_http ? 1 : 0
-  from_port         = 443 
+  from_port         = 443
   cidr_blocks       = ["0.0.0.0/0"]
   protocol          = "tcp"
-  to_port           = 443 
+  to_port           = 443
   type              = "ingress"
   security_group_id = aws_security_group.security_group.id
 }

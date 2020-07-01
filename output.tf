@@ -38,6 +38,6 @@ output "availability_zone" {
 }
 
 output "instance_count" {
-  value = var.ec2_instance_count
+  value       = var.ec2_instance_count
   description = "EC2 instance count"
 }
