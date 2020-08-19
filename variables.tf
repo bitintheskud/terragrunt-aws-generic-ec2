@@ -151,9 +151,10 @@ variable "security_group" {
   description = "Security group parameters"
 }
 
-variable "iam_instance_profile_policy" {
+variable "instance_profile" {
   type        = string
-  description = "The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile."
+  description = "Instance profile name to attache to the EC2"
+  default     = ""
 }
 
 variable "cloudwatch_sns_topic_arn" {

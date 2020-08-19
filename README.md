@@ -27,6 +27,7 @@ No requirements.
 | bastion\_sg | Bastion security group (required) | `string` | `false` | no |
 | bastion\_source\_sg | Bastion source security group id to allow ssh access to host | `string` | `""` | no |
 | cloudwatch\_action\_enable | Disable or enable action for cloudwatch alarm | `bool` | n/a | yes |
+| cloudwatch\_alert\_to\_enable | List of cloudwatch alert type | `list(string)` | <pre>[<br>  "swap",<br>  "memory",<br>  "disk",<br>  "cpu"<br>]</pre> | no |
 | cloudwatch\_sns\_topic\_arn | The SNS topic ARN to send cloudwatch alarm | `string` | n/a | yes |
 | custom\_tags | Custom tags to add to all the resource | `map(string)` | `{}` | no |
 | disable\_ec2\_api\_termination | Disable api termination for ec2 instance. | `bool` | `false` | no |
@@ -43,13 +44,13 @@ No requirements.
 | enable\_route53 | Enable route53 dns creation for your server | `bool` | `true` | no |
 | enable\_ssh | Enable or disable ssh access | `bool` | `false` | no |
 | env | n/a | `any` | n/a | yes |
-| iam\_instance\_profile\_policy | The IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. | `string` | n/a | yes |
 | identifier | A unique string to describe the role of the resource. This can be for example, front, wp, admin). This is used in the name | `string` | n/a | yes |
+| instance\_profile | Instance profile name to attache to the EC2 | `string` | `""` | no |
 | project | Project code will be use to name resource. | `string` | `"infra"` | no |
 | route53\_zone\_id | Route53 zone id if dns creation is enable (see enable\_route53) | `string` | n/a | yes |
 | security\_group | Security group parameters | `any` | `{}` | no |
 | security\_group\_bastion | Bastion security group ID to allow ssh access to host | `string` | `""` | no |
-| short\_env | Use to shorten environement in name. Some limit apply sometinmes on res name. | `map` | <pre>{<br>  "development": "dev",<br>  "integration": "int",<br>  "preprod": "pprod",<br>  "preproduction": "pprod",<br>  "production": "prod",<br>  "staging": "stag",<br>  "uat": "uat"<br>}</pre> | no |
+| short\_env | Use to shorten environement in name. Some limit apply sometinmes on res name. | `map(string)` | <pre>{<br>  "development": "dev",<br>  "integration": "int",<br>  "preprod": "pprod",<br>  "preproduction": "pprod",<br>  "production": "prod",<br>  "staging": "stag",<br>  "uat": "uat"<br>}</pre> | no |
 | ssh\_cidr\_blocks | Specify cidr block for ssh access to host | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | vpc\_id | VPC id to launch the resource in | `string` | n/a | yes |
 
